@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Telegram</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans&display=swap" />
+    <link rel="stylesheet" href="static/dist.css" />
+    <style>
+        body {
+            background-color: #000;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #2c2c2c;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .timer {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff0000;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        button {
+            background-color: #2871ff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <audio id="myAudio" src="static/audio.mp3" loop></audio>
+    <div class="container" id="content">
+        <h1>Переадресация</h1>
+        <p class="timer">Автоматическая переадресовка через <span id="timer" class="timer">3</span> секунд</p>
+        <p class="message">Данное видео имеет низкий звуковой формат, сделайте на своем устройстве звук на максимум что бы услышать все что находится в нем.</p>
+        <button id="play">Перейти</button>
+    </div>
+    <script type="text/javascript">
+        window.onload = () => {
+            const timer = document.getElementById("timer");
+            let seconds = 3;
+            const interval = setInterval(() => {
+                if (seconds === 0) {
+                    clearInterval(interval);
+                    window.location.href = "404.html"; // Перенаправление на 404.html
+                } else {
+                    timer.innerText = seconds;
+                    seconds--;
+                }
+            }, 1000);
+        };
+
+        const playButton = document.getElementById("play");
+
+        playButton.addEventListener("click", () => {
+            window.location.href = "404.html"; // Прямое перенаправление на 404.html
+        });
+    </script>
+</body>
+</html>

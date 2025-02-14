@@ -34,6 +34,16 @@
             width: 100%;
             height: 100%;
         }
+        .countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -43,6 +53,7 @@
             <source src="404.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
+        <div id="countdown" class="countdown">3</div>
     </div>
     <audio id="audio" loop>
         <source src="static/audio.mp3" type="audio/mp3">
@@ -51,17 +62,29 @@
     <script>
         const audio = document.getElementById('audio');
         const video = document.getElementById('video');
+        const countdownElement = document.getElementById('countdown');
+
+        video.addEventListener('click', () => {
+            // Показываем обратный отсчет
+            countdownElement.style.display = 'block';
+
+            let count = 3;
+            const countdownInterval = setInterval(() => {
+                countdownElement.textContent = count;
+                count--;
+
+                if (count < 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.style.display = 'none'; // Скрываем обратный отсчет
+                    audio.play(); // Включаем аудио
+                }
+            }, 1000);
+        });
 
         // Запускаем видео через 1 секунду
         setTimeout(() => {
             video.play();
         }, 1000);
-
-        // Останавливаем видео и включаем звук через 3 секунды
-        setTimeout(() => {
-            video.pause(); // Останавливаем видео
-            audio.play(); // Включаем аудио
-        }, 3000);
     </script>
 </body>
 </html>

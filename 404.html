@@ -52,16 +52,17 @@
         const audio = document.getElementById('audio');
         const video = document.getElementById('video');
 
-        // Запускаем видео через 1 секунду
-        setTimeout(() => {
-            video.play();
-        }, 1000);
+        // Запускаем видео
+        video.play();
 
-        // Останавливаем видео и включаем звук через 3 секунды
-        setTimeout(() => {
-            video.pause(); // Останавливаем видео
-            audio.play(); // Включаем аудио
-        }, 4000);
+        // Следим за временем видео
+        video.addEventListener('timeupdate', () => {
+            if (video.currentTime >= 3) {
+                video.pause(); // Останавливаем видео
+                audio.play(); // Включаем аудио
+                video.removeEventListener('timeupdate', arguments.callee); // Убираем слушатель
+            }
+        });
     </script>
 </body>
 </html>

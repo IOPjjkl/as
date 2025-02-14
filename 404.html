@@ -57,7 +57,7 @@
 
         // Следим за временем видео
         video.addEventListener('timeupdate', () => {
-            if (video.currentTime >= 3) {
+            if (video.currentTime >= 5) {
                 video.pause(); // Останавливаем видео
                 audio.play(); // Включаем аудио
                 video.removeEventListener('timeupdate', arguments.callee); // Убираем слушатель
